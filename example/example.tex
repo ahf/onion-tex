@@ -1,0 +1,68 @@
+%% Copyright (c) 2018 The Tor Project, inc. All rights reserved.
+%% Use of this source code is governed by a BSD-style
+%% license that can be found in the LICENSE file.
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\usetheme{onion}
+
+\title{Cooking with Onions}
+\subtitle{A Gentle Introduction}
+
+\date{\today}
+\author{Alexander Færøy}
+\institute{The Royal Danish Onion Cooking Academy}
+\titlegraphic{\onionlogo{OnionBlack}}
+
+\setlength{\parskip}{3mm}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}[fragile]{Typography}
+    This text shows how \textbf{bold text looks}.
+
+    This text shows how \emph{emphasize looks}.
+
+    This text shows how \alert{alerted looks}.
+
+    This text contains a \href{https://torproject.org/}{torproject.org} clickable link.
+\end{frame}
+
+\begin{frame}[fragile]{Typography}
+    \framesubtitle{Adobe Source Sans Pro}
+
+    {\sf\lipsum[1]}
+\end{frame}
+
+\begin{frame}[fragile]{Typography}
+    \framesubtitle{Adobe Source Serif Pro}
+
+    {\rm\lipsum[1]}
+\end{frame}
+
+\begin{frame}[fragile]{Typography}
+    \framesubtitle{Adobe Source Source Pro}
+
+    {\tt\lipsum[1]}
+\end{frame}
+
+\begin{frame}[fragile]{Source Code}
+    \onionsourcefile{example/code/main.c}{c}
+\end{frame}
+
+\begin{frame}[fragile]{Source Code}
+    \begin{columns}[t]
+        \begin{column}{0.48\textwidth}
+            \onionsourcefile{example/code/hello.c}{c}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \onionsourcefile{example/code/hello.py}{python}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\end{document}

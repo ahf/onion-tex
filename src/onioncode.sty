@@ -1,0 +1,30 @@
+%% Copyright (c) 2018 The Tor Project, inc. All rights reserved.
+%% Use of this source code is governed by a BSD-style
+%% license that can be found in the LICENSE file.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{onioncode}[2018/04/04 Onion Source Code]
+
+%%
+%% Dependencies.
+%%
+\RequirePackage{listings}
+
+%%
+%% Default configuration for listings.
+%%
+\lstset{%
+    numbers=none,
+    basicstyle=\linespread{0.7}\scriptsize\ttfamily,
+    numberstyle=\color{OnionDarkGray},
+    keywordstyle=\bfseries\color{OnionPurple},
+    identifierstyle=\color{OnionBlack},
+    commentstyle=\color{OnionDarkGray!80},
+    stringstyle=\color{OnionGreen},
+    breaklines=true,
+    showstringspaces=false
+}
+
+%%
+%% \onionsourcefile{filename}{language}
+%%
+\newcommand{\onionsourcefile}[2]{\lstinputlisting[language={#2}]{#1}}

@@ -1,0 +1,86 @@
+%% Copyright (c) 2018 The Tor Project, inc. All rights reserved.
+%% Use of this source code is governed by a BSD-style
+%% license that can be found in the LICENSE file.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeonion}[2018/04/04 Onion Inner Theme]
+
+%%
+%% Item lists and captions.
+%%
+\setbeamertemplate{itemize items}{\textbullet}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+
+%%
+%% Title page.
+%%
+\setbeamertemplate{title page}{%
+    \begin{minipage}[b][\paperheight]{\textwidth}
+        \vfill%
+        \usebeamertemplate*{title}
+        \usebeamertemplate*{subtitle}
+        \usebeamertemplate*{author}
+        \usebeamertemplate*{date}
+        \usebeamertemplate*{institute}
+        \usebeamertemplate*{title graphic}
+        \vfill%
+        \vspace*{1em}
+    \end{minipage}
+}
+
+%%
+%% Title Graphic.
+%%
+\setbeamertemplate{title graphic}{%
+    \vbox to 0pt {
+        \flushright\inserttitlegraphic%
+    }
+    \nointerlineskip%
+}
+
+%%
+%% Title.
+%%
+\setbeamertemplate{title}{%
+    \raggedright%
+    \inserttitle%
+    \par%
+    \vspace*{0.45em}
+}
+
+%%
+%% Subtitle.
+%%
+\setbeamertemplate{subtitle}{%
+    \raggedright%
+    \insertsubtitle%
+    \par%
+    \vspace*{0.45em}
+}
+
+%%
+%% Author.
+%%
+\setbeamertemplate{author}{%
+    \vspace*{2.5em}
+    \insertauthor%
+    \par%
+    \vspace*{0.45em}
+}
+
+%%
+%% Date.
+%%
+\setbeamertemplate{date}{%
+    \insertdate%
+    \par%
+}
+
+%%
+%% Institute.
+%%
+\setbeamertemplate{institute}{%
+    \vspace*{1.45em}
+    \insertinstitute%
+    \par%
+}
