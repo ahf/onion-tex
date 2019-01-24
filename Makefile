@@ -3,7 +3,7 @@ EXAMPLE_TEX_FILE   = example/example.tex
 EXAMPLE_PDF_FILE   = example/example.pdf
 EXAMPLE_OUTPUT_DIR = example/output
 
-export TEXINPUTS:=$(shell pwd)/src:${TEXINPUTS}
+export TEXINPUTS:=$(shell pwd)/src/tex:${TEXINPUTS}
 
 all: example
 
