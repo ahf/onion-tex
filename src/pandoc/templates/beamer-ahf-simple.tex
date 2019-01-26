@@ -1,0 +1,75 @@
+%% Copyright (c) 2019 The Tor Project, inc. All rights reserved.
+%% Use of this source code is governed by a BSD-style
+%% license that can be found in the LICENSE file.
+\documentclass[aspectratio=$if(slides.aspect-ratio)$$slides.aspect-ratio$$else$169$endif$,$if(slides.font-size)$$slides.font-size$$else$10pt$endif$]{beamer}
+
+\usepackage[utf8]{inputenc}
+
+\usetheme{onion}
+
+$if(title)$
+\title{$title$}
+$endif$
+
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+
+$if(date)$
+\date{$date$}
+$else$
+\date{\today}
+$endif$
+
+$if(author)$
+\author{$for(author)$$author.name$$sep$ \and $endfor$}
+$endif$
+
+$if(institute)$
+\institute{$institute$}
+$endif$
+
+$if(slides.logo)$
+\titlegraphic{$slides.logo$}
+$else$
+\titlegraphic{\onionlogocolor}
+$endif$
+
+\setlength{\parskip}{3mm}
+
+%% Pandoc uses \tightlist when using enumerations/lists in Markdown.
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\AtBeginPart{
+    \let\insertpartnumber\relax
+    \let\partname\relax
+    \frame{\partpage}
+}
+
+\AtBeginSection{
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+}
+
+\AtBeginSubsection{
+    \let\insertsubsectionnumber\relax
+    \let\subsectionname\relax
+    \frame{\subsectionpage}
+}
+
+\begin{document}
+
+$if(title)$
+\frame{\titlepage}
+$endif$
+
+$if(slides.table-of-contents)$
+\begin{frame}
+    \tableofcontents
+\end{frame}
+$endif$
+
+$body$
+
+\end{document}
