@@ -1,0 +1,423 @@
+## What is Tor?
+
+\begin{columns}
+    \begin{column}{0.6\textwidth}
+        \begin{itemize}[label=\textbullet]
+            \item Online anonymity and censorship circumvention.
+                \begin{itemize}[label=\textendash]
+                    \item Free software.
+                    \item Open network.
+                \end{itemize}
+            \item Community of researchers, developers, users, and relay operators.
+            \item U.S. 501(c)(3) non-profit organization.
+        \end{itemize}
+    \end{column}
+
+    \begin{column}{0.4\textwidth}
+        \begin{center}
+            \includegraphics[width=0.95\textwidth]{images/what_is_tor.jpg}
+        \end{center}
+    \end{column}
+\end{columns}
+
+## History
+
+\begin{description}[align=parleft,labelwidth=3cm]
+    \item [1990s]       Onion routing for privacy online.
+    \item [Early 2000s] Working with the U.S. Naval Research Laboratory.
+    \item [2004]        Sponsorship by the Electronic Frontier Foundation.
+    \item [2006]        The Tor Project, Inc. became a non-profit.
+    \item [2007]        Expansion to anti-censorship.
+    \item [2008]        Tor Browser development.
+    \item [2010]        The Arab spring.
+    \item [2013]        The summer of Snowden.
+\end{description}
+
+## Users
+
+\centering{Somewhere between 2,000,000 and 8,000,000 daily users.}
+
+\input{images/tor_group.tex}
+
+## Threat Model {.t}
+
+\centering
+\begin{tikzpicture}
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{relay}=[circle, draw, thin, fill=OnionDarkPurple!80, scale=0.8]
+
+    %% Alice.
+    \node[] at (-6, 2.5) {Alice};
+    \node[alice, monitor, minimum size=1.6cm] (alice) at (-6, 0.5) {};
+
+    %% Bob.
+    \node[] at (6, 2.5) {Bob};
+    \node[bob, mirrored, monitor, minimum size=1.6cm] (bob) at (6, 0.5) {};
+
+    %% The Anonymity Network cloud.
+    \node[] at (0, 2) {Anonymity Network};
+    \node[cloud, fill=OnionPurple!40, cloud puffs=16, cloud puff arc=100, minimum width=5.5cm, minimum height=2.6cm, aspect=1] at (0,0) {};
+
+    %% The relay nodes inside the Anonymity Network cloud.
+    \node[relay] (r1) at (-1.9, 0.2) {};
+    \node[relay] (r2) at (0.0, 0.1) {};
+    \node[relay] (r3) at (1.8, -0.4) {};
+    \node[relay] (r4) at (-0.7, 0.7) {};
+    \node[relay] (r5) at (-1.0, -0.7) {};
+    \node[relay] (r6) at (0.8, -0.6) {};
+    \node[relay] (r7) at (1.2, 0.5) {};
+
+    %% Paths between our three relays.
+    \path[thick] (r1) edge (r2);
+    \path[thick] (r2) edge (r3);
+
+    %% Path between Alice and R1.
+    \path[thick] (-4.4, -0.4) edge (r1);
+
+    %% Path between R3 and Bob.
+    \path[thick] (r3) edge (4.4, -0.4);
+
+    %% Helper lines for debugging.
+    %% \draw[help lines] (-7,-3) grid (7,3);
+\end{tikzpicture}
+
+\large{What can the attacker do?}
+
+## Threat Model {.t}
+
+\centering
+\begin{tikzpicture}
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{relay}=[circle, draw, thin, fill=OnionDarkPurple!80, scale=0.8]
+    \tikzstyle{wiretap}=[circle, draw, thin, fill=red!40, scale=0.8]
+
+    %% Alice.
+    \node[] at (-6, 2.5) {Alice};
+    \node[alice, monitor, minimum size=1.6cm] (alice) at (-6, 0.5) {};
+
+    %% Bob.
+    \node[] at (6, 2.5) {Bob};
+    \node[bob, mirrored, monitor, minimum size=1.6cm] (bob) at (6, 0.5) {};
+
+    %% The Anonymity Network cloud.
+    \node[] at (0, 2) {Anonymity Network};
+    \node[cloud, fill=OnionPurple!40, cloud puffs=16, cloud puff arc=100, minimum width=5.5cm, minimum height=2.6cm, aspect=1] at (0,0) {};
+
+    %% The relay nodes inside the Anonymity Network cloud.
+    \node[relay] (r1) at (-1.9, 0.2) {};
+    \node[relay] (r2) at (0.0, 0.1) {};
+    \node[relay] (r3) at (1.8, -0.4) {};
+    \node[relay] (r4) at (-0.7, 0.7) {};
+    \node[relay] (r5) at (-1.0, -0.7) {};
+    \node[relay] (r6) at (0.8, -0.6) {};
+    \node[relay] (r7) at (1.2, 0.5) {};
+
+    %% Paths between our three relays.
+    \path[thick] (r1) edge (r2);
+    \path[thick] (r2) edge (r3);
+
+    %% Path between Alice and R1.
+    \path[thick] (-4.4, -0.4) edge (r1);
+
+    %% Path between R3 and Bob.
+    \path[thick] (r3) edge (4.4, -0.4);
+
+    %% Adversary.
+    \node[maninblack, monitor, minimum size=1.3cm] (adversary) at (-5, -2) {};
+
+    %% Adversary wiretap.
+    \node[wiretap] (wiretap) at (-3.4, -0.15) {};
+
+    %% Adversary path.
+    \path[thick, red!40] (adversary) edge (wiretap);
+
+    %% Helper lines for debugging.
+    %% \draw[help lines] (-7,-3) grid (7,3);
+\end{tikzpicture}
+
+## Threat Model {.t}
+
+\centering
+\begin{tikzpicture}
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{relay}=[circle, draw, thin, fill=OnionDarkPurple!80, scale=0.8]
+    \tikzstyle{wiretap}=[circle, draw, thin, fill=red!40, scale=0.8]
+
+    %% Alice.
+    \node[] at (-6, 2.5) {Alice};
+    \node[alice, monitor, minimum size=1.6cm] (alice) at (-6, 0.5) {};
+
+    %% Bob.
+    \node[] at (6, 2.5) {Bob};
+    \node[bob, mirrored, monitor, minimum size=1.6cm] (bob) at (6, 0.5) {};
+
+    %% The Anonymity Network cloud.
+    \node[] at (0, 2) {Anonymity Network};
+    \node[cloud, fill=OnionPurple!40, cloud puffs=16, cloud puff arc=100, minimum width=5.5cm, minimum height=2.6cm, aspect=1] at (0,0) {};
+
+    %% The relay nodes inside the Anonymity Network cloud.
+    \node[wiretap] (r1) at (-1.9, 0.2) {};
+    \node[relay]   (r2) at (0.0, 0.1) {};
+    \node[wiretap] (r3) at (1.8, -0.4) {};
+    \node[relay]   (r4) at (-0.7, 0.7) {};
+    \node[relay]   (r5) at (-1.0, -0.7) {};
+    \node[relay]   (r6) at (0.8, -0.6) {};
+    \node[relay]   (r7) at (1.2, 0.5) {};
+
+    %% Paths between our three relays.
+    \path[thick] (r1) edge (r2);
+    \path[thick] (r2) edge (r3);
+
+    %% Path between Alice and R1.
+    \path[thick] (-4.4, -0.4) edge (r1);
+
+    %% Path between R3 and Bob.
+    \path[thick] (r3) edge (4.4, -0.4);
+
+    %% Adversary.
+    \node[maninblack, monitor, minimum size=1.3cm] (adversary) at (-5, -2) {};
+
+    %% Path between our adversary and R1 and R3.
+    \path[thick, red!40] (adversary) edge (r1);
+    \path[thick, red!40, bend right] (-3.5, -3.0) edge (r3);
+
+    %% Helper lines for debugging.
+    %% \draw[help lines] (-7,-3) grid (7,3);
+\end{tikzpicture}
+
+## Threat Model {.t}
+
+\centering
+\begin{tikzpicture}
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{relay}=[circle, draw, thin, fill=OnionDarkPurple!80, scale=0.8]
+    \tikzstyle{wiretap}=[circle, draw, thin, fill=red!40, scale=0.8]
+
+    %% Alice.
+    \node[] at (-6, 2.5) {Alice};
+    \node[alice, monitor, minimum size=1.6cm] (alice) at (-6, 0.5) {};
+
+    %% Bob.
+    \node[] at (6, 2.5) {Bob};
+    \node[bob, mirrored, monitor, minimum size=1.6cm] (bob) at (6, 0.5) {};
+
+    %% The Anonymity Network cloud.
+    \node[] at (0, 2) {Anonymity Network};
+    \node[cloud, fill=OnionPurple!40, cloud puffs=16, cloud puff arc=100, minimum width=5.5cm, minimum height=2.6cm, aspect=1] at (0,0) {};
+
+    %% The relay nodes inside the Anonymity Network cloud.
+    \node[relay] (r1) at (-1.9, 0.2) {};
+    \node[relay] (r2) at (0.0, 0.1) {};
+    \node[relay] (r3) at (1.8, -0.4) {};
+    \node[relay] (r4) at (-0.7, 0.7) {};
+    \node[relay] (r5) at (-1.0, -0.7) {};
+    \node[relay] (r6) at (0.8, -0.6) {};
+    \node[relay] (r7) at (1.2, 0.5) {};
+
+    %% Paths between our three relays.
+    \path[thick] (r1) edge (r2);
+    \path[thick] (r2) edge (r3);
+
+    %% Path between Alice and R1.
+    \path[thick] (-4.4, -0.4) edge (r1);
+
+    %% Path between R3 and Bob.
+    \path[thick] (r3) edge (4.4, -0.4);
+
+    %% Adversary.
+    \node[maninblack, monitor, minimum size=1.3cm] (adversary) at (-5, -2) {};
+
+    %% Adversary wiretap.
+    \node[wiretap] (wiretap) at (3.4, -0.38) {};
+
+    %% Path between our adversary and its wiretap.
+    \path[thick, red!40, bend right] (-3.5, -3.0) edge (wiretap);
+
+    %% Helper lines for debugging.
+    %% \draw[help lines] (-7,-3) grid (7,3);
+\end{tikzpicture}
+
+## Threat Model {.t}
+
+\centering
+\begin{tikzpicture}
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{relay}=[circle, draw, thin, fill=OnionDarkPurple!80, scale=0.8]
+
+    %% Alice.
+    \node[] at (-6, 2.5) {Alice};
+    \node[alice, monitor, minimum size=1.6cm] (alice) at (-6, 0.5) {};
+
+    %% Bob.
+    \node[] at (6, 2.5) {Bob};
+    \node[maninblack, mirrored, monitor, minimum size=1.6cm] (bob) at (6, 0.5) {};
+
+    %% The Anonymity Network cloud.
+    \node[] at (0, 2) {Anonymity Network};
+    \node[cloud, fill=OnionPurple!40, cloud puffs=16, cloud puff arc=100, minimum width=5.5cm, minimum height=2.6cm, aspect=1] at (0,0) {};
+
+    %% The relay nodes inside the Anonymity Network cloud.
+    \node[relay] (r1) at (-1.9, 0.2) {};
+    \node[relay] (r2) at (0.0, 0.1) {};
+    \node[relay] (r3) at (1.8, -0.4) {};
+    \node[relay] (r4) at (-0.7, 0.7) {};
+    \node[relay] (r5) at (-1.0, -0.7) {};
+    \node[relay] (r6) at (0.8, -0.6) {};
+    \node[relay] (r7) at (1.2, 0.5) {};
+
+    %% Paths between our three relays.
+    \path[thick] (r1) edge (r2);
+    \path[thick] (r2) edge (r3);
+
+    %% Path between Alice and R1.
+    \path[thick] (-4.4, -0.4) edge (r1);
+
+    %% Path between R3 and Bob.
+    \path[thick] (r3) edge (4.4, -0.4);
+
+    %% Helper lines for debugging.
+    %% \draw[help lines] (-7,-3) grid (7,3);
+\end{tikzpicture}
+
+## Anonymity vs. Encryption {.t}
+
+\centering
+\begin{tikzpicture}
+    %% Alice.
+    \node[] at (-6, 2.5) {Alice};
+    \node[alice, monitor, minimum size=1.6cm] (alice) at (-6, 0.5) {};
+
+    %% Bob.
+    \node[] at (6, 2.5) {Bob};
+    \node[bob, mirrored, monitor, minimum size=1.6cm] (bob) at (6, 0.5) {};
+
+    %% Encrypted channel.
+    \draw[thick, OnionDarkPurple!80] (-3.4,0) -- (3.4,0);
+    \draw[thick, OnionDarkPurple!80] (-3.4,-1) -- (3.4,-1);
+
+    \node[] at (0, -0.5) {\tiny{\texttt{RG9uJ3QgdXNlIGJhc2U2NCBmb3IgZW5jcnlwdGlvbi4}}};
+
+    %% Helper lines for debugging.
+    %% \draw[help lines] (-7,-3) grid (7,3);
+\end{tikzpicture}
+
+## Metadata
+
+\framesubtitle{The Data About Data}
+
+\centering
+
+\includegraphics[width=0.6\textwidth]{images/michael_hayden.jpg}
+
+\begin{minipage}[b]{0.7\textwidth}
+    \begin{quote}
+        \small{"We Kill People Based on Metadata."}
+
+        \begin{flushright}
+            \footnotesize{---Michael Hayden, former director of the NSA.}
+        \end{flushright}
+    \end{quote}
+\end{minipage}
+
+## Different Purposes of Anonymity
+
+\centering
+\begin{tikzpicture}
+    %% Anonymity in the center.
+    \node[font=\bfseries] at (0, 0) {Anonymity};
+
+    %% Alice -- our human rights activist.
+    \node[font=\footnotesize\bfseries] at (0, 3.5) {Human Rights Activists};
+    \node[alice, minimum size=1.0cm] (alice) at (0, 2.5) {};
+    \node[ellipse callout, draw, yshift=0.3cm, callout absolute pointer={(alice.mouth)}, font=\tiny, align=center] at (2.0, 2.5) {It's reachability!};
+
+    %% Business man -- our business man who cares about security.
+    \node[font=\footnotesize\bfseries] at (3.5, 1.0) {Businesses};
+    \node[businessman, minimum size=1.0cm] (businessman) at (3.5, 0) {};
+    \node[ellipse callout, draw, yshift=0.3cm, callout absolute pointer={(businessman.mouth)}, font=\tiny, align=center] at (5.5, 0) {It's network security!};
+
+    %% Physician -- our privacy concerned citizen.
+    \node[font=\footnotesize\bfseries] at (0, -3.5) {Private Citizens};
+    \node[physician, mirrored, female, minimum size=1.0cm] (physician) at (0, -2.5) {};
+    \node[ellipse callout, draw, yshift=0.3cm, callout absolute pointer={(physician.mouth)}, font=\tiny, align=center] at (-2.0, -2.5) {It's privacy!};
+
+    %% Man in black -- our government security person.
+    \node[font=\footnotesize\bfseries] at (-3.5, 1.0) {Governments};
+    \node[maninblack, mirrored, minimum size=1.0cm] (maninblack) at (-3.5, 0) {};
+    \node[ellipse callout, draw, yshift=0.3cm, callout absolute pointer={(maninblack.mouth)}, font=\tiny, align=center] at (-5.5, 0) {It's traffic-analysis \\ resistance!};
+
+    %% Arrows.
+    \draw[->, thick, OnionDarkPurple!80] (-1.5,    0) -- (-2.5,    0);
+    \draw[->, thick, OnionDarkPurple!80] ( 1.5,    0) -- ( 2.5,    0);
+    \draw[->, thick, OnionDarkPurple!80] (   0,  0.5) -- (   0,  1.5);
+    \draw[->, thick, OnionDarkPurple!80] (   0, -0.5) -- (   0, -1.5);
+
+    %% Helper lines for debugging.
+    %% \draw[help lines] (-7,-3) grid (7,3);
+\end{tikzpicture}
+
+## Tor Browser
+
+## Tor
+
+## OnionShare
+
+## SecureDrop
+
+## Tails
+
+## Encryption vs. Anonymity
+
+## Onion Services
+
+# The Dark Web
+
+## The Dark Web
+
+\centering
+\begin{tikzpicture}[]
+    \begin{scope}[blend group = screen]
+        \fill[red!90, draw=black, line width=1mm]   ( 90:1.2) circle (2);
+        \fill[green!90, draw=black, line width=1mm] (210:1.2) circle (2);
+        \fill[blue!90, draw=black, line width=1mm]  (330:1.2) circle (2);
+    \end{scope}
+
+    \node (a) [text=black,above=3.0em] at ( 90:2)             {Onion Services};
+    \node (b) [text=black,below=3.9em,left of=c] at ( 210:2)  {Online criminal activity};
+    \node (c) [text=black,below=3.9em,right of=b] at ( 330:2) {Unindexed websites};
+    \node [] {};
+\end{tikzpicture}
+
+## The Dark Web
+
+\centering
+\begin{tikzpicture}[]
+    \begin{scope}[blend group = screen]
+        \fill[red!80]   ( 90:1.2) circle (2);
+        \fill[green!80] (110:1.2) circle (2);
+        \fill[blue!80]  (130:1.2) circle (2);
+    \end{scope}
+
+    \node (a) [text=black,above=3.0em] at            (90:2)  {Onion Services};
+    \node (b) [text=black,below=3.9em,left of=c] at  (130:5) {Online criminal activity};
+    \node (c) [text=black,below=3.9em,right of=b] at (130:1) {Unindexed websites};
+    \node [] {};
+\end{tikzpicture}
+
+## Tor is not foolproof
+
+- Operational security mistakes.
+- Browser metadata fingerprinting.
+- Browser exploits.
+- Traffic analysis.
+
+## How can you help?
+
+- Run a Tor relay or a bridge!
+- Help others with Tor and privacy in general.
+- Help find, and maybe fix, bugs in Tor.
+- Work on some of the many open research projects.
+
+## Thanks for Listening!
+
+\centering\Large{Questions?}
