@@ -14,7 +14,7 @@ slides:
 
 \begin{columns}
     \begin{column}{0.65\textwidth}
-        \begin{itemize}[label=\textbullet]
+        \begin{itemize}
             \item Core Developer at The Tor Project since February 2017.
             \item Free Software developer since 2006.
             \item Worked with distributed systems in the Erlang
@@ -36,9 +36,9 @@ slides:
 
 \begin{columns}
     \begin{column}{0.6\textwidth}
-        \begin{itemize}[label=\textbullet]
+        \begin{itemize}
             \item Online anonymity and censorship circumvention.
-                \begin{itemize}[label=\textendash]
+                \begin{itemize}
                     \item Free software.
                     \item Open network.
                 \end{itemize}
@@ -56,17 +56,32 @@ slides:
 
 ## History
 
-\begin{description}[align=parleft,labelwidth=3cm]
-    \item [1990s]       Onion routing for privacy online.
-    \item [Early 2000s] Working with the U.S. Naval Research Laboratory.
-    \item [2004]        Sponsorship by the Electronic Frontier Foundation.
-    \item [2006]        The Tor Project, Inc. became a non-profit.
-    \item [2007]        Expansion to anti-censorship.
-    \item [2008]        Tor Browser development.
-    \item [2010]        The Arab spring.
-    \item [2013]        The summer of Snowden.
-    \item [2018]        Dedicated anti-censorship team created.
-\end{description}
+**1990s**
+  : Onion routing for privacy online.
+
+**Early 2000s**
+  : Working with the U.S. Naval Research Laboratory.
+
+**2004**
+  : Sponsorship by the Electronic Frontier Foundation.
+
+**2006**
+  : The Tor Project, Inc. became a non-profit.
+
+**2007**
+  : Expansion to anti-censorship.
+
+**2008**
+  : Tor Browser development.
+
+**2010**
+  : The Arab spring.
+
+**2013**
+  : The summer of Snowden.
+
+**2018**
+  : Dedicated anti-censorship team created.
 
 ## {.plain}
 
@@ -83,7 +98,7 @@ slides:
 
 ## {.plain}
 
-\begin{tikzpicture}[remember picture,overlay, background rectangle/.style={fill=OnionPurple}, show background rectangle]
+\begin{tikzpicture}[remember picture,overlay, background rectangle/.style={fill=OnionDarkPurple}, show background rectangle]
     \node[at=(current page.center)] {\includegraphics[scale=0.20]{images/tor_browser_android.png}};
 \end{tikzpicture}
 
@@ -839,13 +854,11 @@ Alice finally asks $R_{3}$ to connect to Bob.
 
 ## The Tor Network
 
-\begin{itemize}[label=\textbullet]
-    \item An open network -- everybody can join!
-    \item Between 6000 and 7000 relay nodes.
-    \item Kindly hosted by various individuals, companies, and non-profit organisations.
-    \item 9 Directory Authority nodes and 1 Bridge Authority node.
-    \item What is the IPv6 story?
-\end{itemize}
+- An open network -- everybody can join!
+- Between 6000 and 7000 relay nodes.
+- Kindly hosted by various individuals, companies, and non-profit organisations.
+- 9 Directory Authority nodes and 1 Bridge Authority node.
+- What is the IPv6 story?
 
 ## The Tor Network
 
@@ -906,15 +919,12 @@ Alice finally asks $R_{3}$ to connect to Bob.
 
 Tor's **safety** comes from **diversity**:
 
-\begin{enumerate}[(1), itemsep=12pt]
-    \item Diversity of relays. The more relays we have and the more diverse
-          they are, the fewer attackers are in a position to do traffic confirmation. \\ \ \\
+1. Diversity of relays. The more relays we have and the more diverse
+   they are, the fewer attackers are in a position to do traffic confirmation.  
+   Research problem: How do we measure diversity over time?
 
-          Research problem: How do we measure diversity over time?
-
-    \item Diversity of users and reasons to use it. 50000 users in Iran means
-          almost all of them are normal citizens.
-\end{enumerate}
+2. Diversity of users and reasons to use it. 50000 users in Iran means
+   almost all of them are normal citizens.
 
 ##
 
@@ -1083,15 +1093,12 @@ Tor's **safety** comes from **diversity**:
 
 ## The Implementation of Tor
 
-\begin{itemize}[label=\textbullet]
-    \item The reference Tor implementation is written in the C programming
-          language.
-    \item Ongoing experiments with Mozilla’s Rust programming language.
-    \item Follow best practices: high coverage for tests, integration tests,
-          coverity, static code analysis, and code review policies.
-    \item Specification and discussion before implementation. Specifications
-          can be found at \href{https://gitweb.torproject.org/torspec.git}{gitweb.torproject.org/torspec}.
-\end{itemize}
+- The reference Tor implementation is written in the C programming language.
+- Ongoing experiments with Mozilla’s Rust programming language.
+- Follow best practices: high coverage for tests, integration tests, coverity,
+  static code analysis, and code review policies.
+- Specification and discussion before implementation. Specifications can be
+  found at \href{https://gitweb.torproject.org/torspec.git}{gitweb.torproject.org/torspec}.
 
 ## {.c}
 
@@ -1104,16 +1111,14 @@ Tor's **safety** comes from **diversity**:
 
 ## Onion Services
 
-\begin{itemize}[label=\textbullet]
-    \item Allows servers to be anonymous.
-    \item The ".onion" Special-Use Domain Name (RFC 7686).
-    \item Introduced in Tor version 0.0.6pre1 from April, 2004.
-    \item Traffic stays within the Tor network: No need to exit the network.
-    \item Onion addresses are either 16 characters long (for version 2) or 52
-          characters long (for version 3). \\ \ \\
+- Allows servers to be anonymous.
+- The ".onion" Special-Use Domain Name (RFC 7686).
+- Introduced in Tor version 0.0.6pre1 from April, 2004.
+- Traffic stays within the Tor network: No need to exit the network.
+- Onion addresses are either 16 characters long (for version 2) or 52
+  characters long (for version 3).
 
-          Research problem: How do we handle these long addresses?
-\end{itemize}
+  Research problem: How do we handle these long addresses?
 
 ## {.plain}
 
@@ -1125,13 +1130,11 @@ Tor's **safety** comes from **diversity**:
 
 Properties includes:
 
-\begin{itemize}[label=\textbullet]
-    \item Self authenticated.
-    \item End-to-end encrypted.
-    \item Isolation and NAT punching.
-    \item Minimized attack surface.
-    \item Support for Unix domain sockets.
-\end{itemize}
+- Self authenticated.
+- End-to-end encrypted.
+- Isolation and NAT punching.
+- Minimized attack surface.
+- Support for Unix domain sockets.
 
 ## Onion Services
 
@@ -1534,11 +1537,9 @@ Properties includes:
 
 ## Anti-censorship Strategies
 
-\begin{itemize}[label=\textbullet]
-    \item Censors will apply censorship to  nodes in the network.
-    \item Same for known bridges.
-    \item Solution: either make it hard to analyze the traffic or make it hard to block the bridges.
-\end{itemize}
+- Censors will apply censorship to  nodes in the network.
+- Same for known bridges.
+- Solution: either make it hard to analyze the traffic or make it hard to block the bridges.
 
 ## Pluggable Transports {.c}
 
@@ -1547,26 +1548,20 @@ Properties includes:
 
 ## Obfourscator (obfs4)
 
-\begin{itemize}[label=\textbullet]
-    \item Does full x25519 handshakes, but uses Elligator2 to map elliptic curve points.
-    \item Allows you to tune timers for traffic.
-\end{itemize}
+- Does full x25519 handshakes, but uses Elligator2 to map elliptic curve points.
+- Allows you to tune timers for traffic.
 
 ## Meek
 
-\begin{itemize}[label=\textbullet]
-    \item Connect with TLS with SNI set to some large user of the cloud provider.
-    \item Inside your TLS connection you do a normal HTTP request, but with the Host header set to the server you want to reach inside the cloud.
-    \item Efficient, but expensive :-(
-\end{itemize}
+- Connect with TLS with SNI set to some large user of the cloud provider.
+- Inside your TLS connection you do a normal HTTP request, but with the Host header set to the server you want to reach inside the cloud.
+- Efficient, but expensive :-(
 
 ## Domain Fronting
 
-\begin{itemize}[label=\textbullet]
-    \item Using ESNI?
-    \item Using various cloud providers message queue services?
-    \item Generally using large centralized services to give access to censored people.
-\end{itemize}
+- Using ESNI?
+- Using various cloud providers message queue services?
+- Generally using large centralized services to give access to censored people.
 
 ## Snowflake {.c}
 
@@ -1600,18 +1595,16 @@ Check it out at \href{https://explorer.ooni.io/}{explorer.ooni.io}
 
 ## Tor is not foolproof
 
-\begin{itemize}[label=\textbullet]
-    \item Operational security mistakes.
-    \item Browser metadata fingerprinting.
-    \item Browser exploits.
-    \item Traffic analysis.
-\end{itemize}
+- Operational security mistakes.
+- Browser metadata fingerprinting.
+- Browser exploits.
+- Traffic analysis.
 
 ## How can you help?
 
 \begin{columns}
     \begin{column}{0.65\textwidth}
-        \begin{itemize}[label=\textbullet]
+        \begin{itemize}
             \item Run a Tor relay or a bridge!
             \item Teach others about Tor and privacy in general.
             \item Find, and maybe fix, bugs in Tor.
