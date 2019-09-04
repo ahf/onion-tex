@@ -11,5 +11,17 @@
 \RequirePackage{onionicons}
 \RequirePackage{onionlogos}
 \RequirePackage{onioncode}
-\RequirePackage{onionhyperref}
 \RequirePackage{onionfont}
+
+%%
+%% Only require some of our packages if their main package is loaded.
+%%
+\AtEndPreamble{
+    \@ifpackageloaded{pgfplots}{
+        \RequirePackage{onionpgfplotstheme}
+    }{}
+
+    \@ifpackageloaded{hyperref}{
+        \RequirePackage{onionhyperref}
+    }{}
+}
