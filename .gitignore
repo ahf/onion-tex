@@ -1,2 +1,5 @@
 # Example files.
 example/output/*
+
+# All PDF's.
+*.pdf
