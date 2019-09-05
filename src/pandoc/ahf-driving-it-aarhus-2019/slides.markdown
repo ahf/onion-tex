@@ -37,7 +37,7 @@ slides:
 \begin{columns}
     \begin{column}{0.6\textwidth}
         \begin{itemize}
-            \item Online anonymity and censorship circumvention.
+            \item Online anonymity, and censorship circumvention.
                 \begin{itemize}
                     \item Free software.
                     \item Open network.
@@ -913,6 +913,17 @@ Alice finally asks $R_{3}$ to connect to Bob.
 
 \tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
 
+## The Tor Network
+
+Tor's **safety** comes from **diversity**:
+
+1. Diversity of relays. The more relays we have and the more diverse
+   they are, the fewer attackers are in a position to do traffic confirmation.  
+   Research problem: How do we measure diversity over time?
+
+2. Diversity of users and reasons to use it. 50000 users in Iran means
+   almost all of them are normal citizens.
+
 ## {.plain .noframenumbering}
 
 \begin{tikzpicture}[overlay, remember picture]
@@ -921,7 +932,7 @@ Alice finally asks $R_{3}$ to connect to Bob.
             \small{\alert{\textbf{I live in Iran and I have been using Tor for
             censorship circumvention.}} During political unrest while the government
             tightens grip on other censorship circumvention alternatives,
-            \alert{\textbf{Tor with obfuscation plugins remain the only solution.}} \\
+            \alert{\textbf{Tor with obfuscation plugins remains the only solution.}} \\
 
             Tor changed my personal life in many ways. \alert{\textbf{It made it possible
             to access information on Youtube, Twitter, Blogger and countless other sites.}}
@@ -1039,9 +1050,12 @@ Alice finally asks $R_{3}$ to connect to Bob.
 
 ## Anti-censorship Strategies
 
-- Censors will apply censorship to **known** relays in the network.
-- Same applies for **known** bridges.
-- \textbf{Solution:} We either make it hard to analyze the traffic and/or make it hard to find and block the bridges.
+1. Censors will apply censorship to **all** relays in the network and effectively block access to the Tor network.
+2. Censors will apply censorship to **known** bridges.
+
+\textbf{Solution:} We make it difficult to find and block bridges and we make
+it difficult to learn if a given connection is between a Tor user and an
+entry-point into the Tor network.
 
 ## Bridges
 
@@ -1159,14 +1173,14 @@ Alice finally asks $R_{3}$ to connect to Bob.
     \node[alice, monitor, minimum size=1.2cm] (alice) at (-4, 0) {};
 
     %% PT Client.
-    \node[pt, minimum width=3.0cm] (pt client) at (-4, -2) {PT Client};
+    \node[pt, minimum width=3.0cm, rounded corners] (pt client) at (-4, -2) {PT Client};
 
     %% Bridge.
     \node[font=\small] at (4, 1.5) {Bridge};
     \node[bridge, minimum size=2.5cm] (bridge) at (4, 0) {};
 
     %% PT Server.
-    \node[pt, minimum width=3.0cm] (pt server) at (4, -2) {PT Server};
+    \node[pt, minimum width=3.0cm, rounded corners] (pt server) at (4, -2) {PT Server};
 
     %% PT Client connects to PT Server.
     \draw[<->, thick, teal!80] (-3.0, -2) -- (3.0, -2);
@@ -1191,7 +1205,7 @@ Alice finally asks $R_{3}$ to connect to Bob.
   technology without having to modify the Tor source code itself.
 
 - The specification for Pluggable Transports is open and allows other vendors
-  to implement support for PT's in their own products.
+  to implement support for PTs in their own products.
 
 - Allows people to experiment with different transports for Tor that might not
   be doing any anti-censorship related obfuscation.
@@ -1200,18 +1214,108 @@ Alice finally asks $R_{3}$ to connect to Bob.
 
 - Does full x25519 handshakes, but uses Elligator2 to map elliptic curve points.
 - Allows you to tune timers for traffic.
+- Makes active probing hard unless the adversary knows the parameters of the given bridge.
 
 ## SNI Domain Fronting using Meek
 
-- Connect with TLS with the SNI field set to the domain name of a large user of the cloud provider. For example \href{https://ajax.aspnetcdn.com/}{ajax.aspnetcdn.com} on Azure.
-- Inside your TLS connection you do a normal HTTP request, but with the `Host` header set to the server you want to reach inside the cloud.
-- Efficient, but expensive \alert{:-(}
+\vspace*{0.9cm}
+\centering
+\begin{tikzpicture}[overlay,scale=1.32]
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
+
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{web}=[circle, draw, thin, fill=green!80, text=white, font=\scriptsize, scale=0.8]
+
+    %% Define the style for our info boxes and their titles.
+    \tikzstyle{box}=[rectangle, draw=black, fill=white, thick, font=\scriptsize\ttfamily, rounded corners, inner sep=10pt, inner ysep=10pt]
+    \tikzstyle{box title}=[fill=black, text=white, font=\scriptsize\bfseries]
+
+    %% Clip everything that is outside of our "viewport"
+    \clip (-7, -3) rectangle (7, 3);
+
+    %% Our censored area.
+    \node[circle, draw=red!40, fill=red!5, thick, dashed, minimum width=50cm] (censored area) at (-20, 0) {};
+    \node[font=\footnotesize\bfseries, align=center] at (-4, 2.5) {Censored Region};
+
+    %% Alice.
+    \node[font=\small] at (-4, 1.5) {Alice};
+    \node[alice, monitor, minimum size=1.2cm] (alice) at (-4, 0) {};
+
+    %% Our DNS box.
+    \node[box] (dns query) at (0, 2) {%
+        \begin{minipage}{0.35\textwidth}
+            \textbf{A?} ajax.aspnetcdn.com
+        \end{minipage}
+    };
+
+    %% Title for our DNS box.
+    \node[box title, right=10pt] at (dns query.north west) {DNS};
+
+    %% Our TLS box.
+    \node[box, text depth=1cm] (tls) at (0, -1) {%
+        \begin{minipage}{0.35\textwidth}
+            \textbf{SNI:} ajax.aspnetcdn.com
+        \end{minipage}
+    };
+
+    %% Title for our TLS box.
+    \node[box title, right=10pt] at (tls.north west) {TLS};
+
+    %% Our HTTP box
+    \node[box] (http request) at (0, -2) {%
+        \begin{minipage}{0.35\textwidth}
+            POST / HTTP/1.1 \\
+            Host: \textbf{meek.azureedge.net} \\ \ \\
+            ...
+        \end{minipage}
+    };
+
+    %% Title for our HTTP box.
+    \node[box title, right=10pt] at (http request.north west) {HTTP};
+
+    %% Bridge.
+    \node[font=\small] at (4, 2.5) {Bridge};
+    \node[bridge, minimum size=2.5cm] (bridge) at (4, 1.5) {};
+
+    %% Web server.
+    \node[font=\small] at (4, -2) {Webserver};
+    \node[web, minimum size=2.5cm] (webserver) at (4, -1) {};
+
+    %% Connection between Alice and the DNS box.
+    \draw[<->, thick, bend right, shorten <= 0.4cm, shorten >= 0.4cm] (alice) -- (dns query);
+
+    %% Connection between Alice and the TLS box.
+    \draw[<-, thick, shorten <= 0.4cm] (alice) -- (tls);
+
+    %% Connection between the TLS box and the webserver
+    \draw[->, thick, shorten >= 0.4cm] (tls) -- (webserver);
+
+    %% Onion connection between the webserver and the bridge.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (webserver) -- (bridge);
+
+    %% Helper lines for debugging.
+    %% \node[] at (0.0, 0.0) {X};
+    %% \draw[help lines] (-7, -3) grid (7, 3);
+\end{tikzpicture}
+
+## SNI Domain Fronting using Meek
+
+Very \textbf{efficient}, but \textbf{expensive} \alert{:-(}
+
+Unpopular with the cloud providers:
+
+**Google**
+  : Never been a supported feature of Google.
+
+**Amazon**
+  : Already handled as a breach of AWS ToS.
 
 ## Domain Fronting in the Future?
 
 - Use Encrypted SNI?
 - Using message queue services provided by the different cloud vendors?
-- Generally continue to use large, centralized, services to give access people in censored areas.
+- Generally continue to use centralized services to give people in censored areas access.
 
 ## Bridge Distribution {.c}
 
@@ -1229,6 +1333,13 @@ Alice finally asks $R_{3}$ to connect to Bob.
 
 \centering
 \includegraphics[width=1.0\textwidth]{images/snowflake.png}
+
+\tiny{Source: \href{https://snowflake.torproject.org/}{snowflake.torproject.org}}
+
+## Snowflake {.c}
+
+\centering
+\includegraphics[width=1.0\textwidth]{images/snowflake_firefox.png}
 
 ## Tor is not foolproof
 
