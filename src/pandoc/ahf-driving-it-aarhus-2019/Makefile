@@ -10,7 +10,7 @@ export TEXINPUTS:=$(shell pwd)/../../tex:${TEXINPUTS}
 all: $(TARGET)
 
 $(TARGET): $(SOURCE) $(TEMPLATE)
-	pandoc -t beamer --pdf-engine=pdflatex --slide-level 2 --template="./$(TEMPLATE)" $(SOURCE) -o $(TARGET)
+	pandoc -t beamer --slide-level 2 --template="./$(TEMPLATE)" $(SOURCE) -o $(TARGET)
 
 data:
 	mkdir -p data || true
