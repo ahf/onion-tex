@@ -1,8 +1,13 @@
-%% Copyright (c) 2018 The Tor Project, inc. All rights reserved.
+%% Copyright (c) 2018-2019 The Tor Project, inc. All rights reserved.
 %% Use of this source code is governed by a BSD-style
 %% license that can be found in the LICENSE file.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerinnerthemeonion}[2018/04/04 Onion Inner Theme]
+
+%%
+%% Font sizes.
+%%
+\setbeamerfont{institute}{size=\small}
 
 %%
 %% Item lists and captions.
@@ -80,7 +85,7 @@
 %% Institute.
 %%
 \setbeamertemplate{institute}{%
-    \vspace*{1.2em}
+    \vspace*{0.8em}
     \insertinstitute%
     \par%
 }
