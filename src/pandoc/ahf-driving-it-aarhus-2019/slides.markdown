@@ -4,6 +4,7 @@ date: September 5, 2019
 institute: Driving IT Aarhus
 author:
   - name: Alexander Færøy
+    email: ahf@torproject.org
 slides:
     aspect-ratio: 169
     font-size: 14pt

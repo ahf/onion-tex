@@ -16,6 +16,7 @@
 \usepackage[scale=2]{ccicons}
 \usepackage{tikzpeople}
 \usepackage{pgfplots}
+\usepackage{xcolor}
 
 \usetikzlibrary{shapes,backgrounds,dateplot}
 
@@ -23,6 +24,10 @@
 
 \newcommand{\highlight}[1]{%
     \textbf{\alert{#1}}
+}
+
+\newcommand{\colorhref}[3][OnionBlack]{%
+    \href{#2}{\color{#1}{#3}}
 }
 
 $if(title)$
@@ -40,7 +45,7 @@ $else$
 $endif$
 
 $if(author)$
-\author{$for(author)$$author.name$$sep$ \and $endfor$}
+\author{$for(author)$\colorhref{mailto:$author.email$}{$author.name$}$sep$ \and $endfor$}
 $endif$
 
 $if(institute)$
