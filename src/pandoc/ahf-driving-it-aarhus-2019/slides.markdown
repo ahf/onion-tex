@@ -69,7 +69,7 @@ slides:
   : The Tor Project, Inc. became a non-profit.
 
 **2007**
-  : \alert{\textbf{Expansion to anti-censorship.}}
+  : \highlight{Expansion to anti-censorship.}
 
 **2008**
   : Tor Browser development.
@@ -81,7 +81,7 @@ slides:
   : The summer of Snowden.
 
 **2018**
-  : \alert{\textbf{Dedicated anti-censorship team created.}}
+  : \highlight{Dedicated anti-censorship team created.}
 
 ## {.plain}
 
@@ -929,13 +929,13 @@ Tor's **safety** comes from **diversity**:
 \begin{tikzpicture}[overlay, remember picture]
     \node[anchor=center] at (current page.center) {
         \begin{minipage}[c]{0.85\textwidth}
-            \small{\alert{\textbf{I live in Iran and I have been using Tor for
-            censorship circumvention.}} During political unrest while the government
+            \small{\highlight{I live in Iran and I have been using Tor for
+            censorship circumvention.} During political unrest while the government
             tightens grip on other censorship circumvention alternatives,
-            \alert{\textbf{Tor with obfuscation plugins remains the only solution.}} \\
+            \highlight{Tor with obfuscation plugins remains the only solution.} \\
 
-            Tor changed my personal life in many ways. \alert{\textbf{It made it possible
-            to access information on Youtube, Twitter, Blogger and countless other sites.}}
+            Tor changed my personal life in many ways. \highlight{It made it possible
+            to access information on Youtube, Twitter, Blogger and countless other sites.}
             I am grateful of Tor project, people working on it as well as people running
             Tor nodes.}
 
