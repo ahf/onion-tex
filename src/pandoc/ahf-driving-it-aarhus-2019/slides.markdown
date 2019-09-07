@@ -1268,7 +1268,7 @@ entry-point into the Tor network.
         \begin{minipage}{0.35\textwidth}
             POST / HTTP/1.1 \\
             Host: \textbf{meek.azureedge.net} \\ \ \\
-            ...
+            \ldots
         \end{minipage}
     };
 
