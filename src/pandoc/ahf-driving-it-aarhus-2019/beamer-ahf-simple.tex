@@ -20,7 +20,10 @@
 \usepackage{pgfplots}
 \usepackage{xcolor}
 
-\usetikzlibrary{shapes,backgrounds,dateplot}
+\usetikzlibrary{shapes,backgrounds,dateplot,external}
+
+%% This greatly speeds up multiple compiles of the slides, but it seems like everywhere we use overlay and remember picture needs to be redone.
+%% \tikzexternalize[prefix=tikz/]
 
 \setbeamertemplate{footline}{\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[20pt]{\color{gray}\scriptsize\insertframenumber}}}\hspace*{5pt}}
 
