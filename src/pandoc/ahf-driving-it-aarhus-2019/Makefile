@@ -1,6 +1,7 @@
-SOURCE   = slides.markdown
-TARGET   = slides.pdf
-TEMPLATE = beamer-ahf-simple.tex
+SOURCE     = slides.markdown
+TARGET     = slides.pdf
+TARGET_TEX = slides.tex
+TEMPLATE   = beamer-ahf-simple.tex
 
 DATA_START_DATE ?= 2010-01-01
 DATA_END_DATE   ?= 2019-06-10
@@ -9,11 +10,17 @@ export TEXINPUTS:=$(shell pwd)/../../tex:${TEXINPUTS}
 
 all: $(TARGET)
 
-$(TARGET): $(SOURCE) $(TEMPLATE)
-	pandoc --verbose -t beamer --slide-level 2 --template="./$(TEMPLATE)" $(SOURCE) -o $(TARGET)
+$(TARGET): $(TARGET_TEX) $(TIKZ)
+	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $(TARGET_TEX)
+
+$(TARGET_TEX): $(SOURCE) $(TEMPLATE)
+	pandoc --verbose -t beamer --slide-level 2 --template="$(TEMPLATE)" $(SOURCE) -o $(TARGET_TEX)
 
 data:
 	mkdir -p data || true
+
+tikz:
+	mkdir -p tikz || true
 
 data/networksize.csv: data
 	wget -O $@ https://metrics.torproject.org/networksize.csv?start=$(DATA_START_DATE)\&end=$(DATA_END_DATE)
@@ -29,6 +36,6 @@ data/hidserv-rend-relayed-cells.csv: data
 
 
 clean:
-	rm *.pdf || true
+	rm *.pdf *.aux *.auxlock *.fdb_latexmk *.fls *.log *.nav *.out *.snm *.toc || true
 
 .PHONY: data/platforms.csv data/networksize.csv
