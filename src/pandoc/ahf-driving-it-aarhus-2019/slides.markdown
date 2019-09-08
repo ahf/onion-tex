@@ -919,11 +919,12 @@ Alice finally asks $R_{3}$ to connect to Bob.
 Tor's **safety** comes from **diversity**:
 
 1. Diversity of relays. The more relays we have and the more diverse
-   they are, the fewer attackers are in a position to do traffic confirmation.  
-   Research problem: How do we measure diversity over time?
+   they are, the fewer attackers are in a position to do traffic confirmation.
 
 2. Diversity of users and reasons to use it. 50000 users in Iran means
    almost all of them are normal citizens.
+
+**Research problem**: How do we measure diversity over time?
 
 ## {.plain .noframenumbering}
 
