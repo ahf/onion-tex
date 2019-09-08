@@ -86,19 +86,22 @@ slides:
 
 ## {.plain}
 
-\begin{tikzpicture}[remember picture,overlay, background rectangle/.style={fill=OnionDarkPurple}, show background rectangle]
+\tikzset{external/export next=false}
+\begin{tikzpicture}[remember picture, overlay, background rectangle/.style={fill=OnionDarkPurple}, show background rectangle]
     \node[text=white, at=(current page.north), yshift=-2.5cm, font=\bfseries] {Somewhere between 2,000,000 and 8,000,000 daily users.};
     \node[at=(current page.center), yshift=-2.5cm, align=center] {\input{images/tor_group.tex}};
 \end{tikzpicture}
 
 ## {.plain}
 
+\tikzset{external/export next=false}
 \begin{tikzpicture}[remember picture,overlay]
     \node[at=(current page.center)] {\includegraphics[width=\paperwidth, height=\paperheight]{images/tor_browser.png}};
 \end{tikzpicture}
 
 ## {.plain}
 
+\tikzset{external/export next=false}
 \begin{tikzpicture}[remember picture,overlay, background rectangle/.style={fill=OnionDarkPurple}, show background rectangle]
     \node[at=(current page.center)] {\includegraphics[scale=0.20]{images/tor_browser_android.png}};
 \end{tikzpicture}
@@ -928,6 +931,7 @@ Tor's **safety** comes from **diversity**:
 
 ## {.plain .noframenumbering}
 
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay, remember picture]
     \node[anchor=center] at (current page.center) {
         \begin{minipage}[c]{0.85\textwidth}
@@ -950,12 +954,14 @@ Tor's **safety** comes from **diversity**:
 
 ## {.plain}
 
+\tikzset{external/export next=false}
 \begin{tikzpicture}[remember picture,overlay]
     \node[at=(current page.center)] {\includegraphics[width=\paperwidth, height=\paperheight]{images/block_result.png}};
 \end{tikzpicture}
 
 ## {.plain}
 
+\tikzset{external/export next=false}
 \begin{tikzpicture}[remember picture,overlay]
     \node[at=(current page.center)] {\includegraphics[width=\paperwidth, height=\paperheight]{images/tdc_dk_block.png}};
 \end{tikzpicture}
@@ -964,6 +970,7 @@ Tor's **safety** comes from **diversity**:
 
 \vspace*{0.9cm}
 \centering
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay,scale=1.32]
     %% Clip everything that is outside of our "viewport"
     \clip (-7, -3) rectangle (7, 3);
@@ -994,6 +1001,7 @@ Tor's **safety** comes from **diversity**:
 
 \vspace*{0.9cm}
 \centering
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay,scale=1.32]
     %% Clip everything that is outside of our "viewport"
     \clip (-7, -3) rectangle (7, 3);
@@ -1025,6 +1033,7 @@ Tor's **safety** comes from **diversity**:
 
 \vspace*{0.9cm}
 \centering
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay,scale=1.32]
     %% Clip everything that is outside of our "viewport"
     \clip (-7, -3) rectangle (7, 3);
@@ -1063,6 +1072,7 @@ entry-point into the Tor network.
 
 \vspace*{0.9cm}
 \centering
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay,scale=1.32]
     %% Define the style for our relay nodes inside the Anonymity Network cloud.
     \tikzstyle{relay}=[circle, draw, thin, fill=OnionDarkPurple!80, text=white, font=\scriptsize, scale=0.8]
@@ -1124,6 +1134,7 @@ entry-point into the Tor network.
 
 \vspace*{0.9cm}
 \centering
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay,scale=1.32]
     %% Define the style for our relay nodes inside the Anonymity Network cloud.
     \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
@@ -1158,6 +1169,7 @@ entry-point into the Tor network.
 
 \vspace*{0.9cm}
 \centering
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay,scale=1.32]
     %% Define the style for our relay nodes inside the Anonymity Network cloud.
     \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
@@ -1222,6 +1234,7 @@ entry-point into the Tor network.
 
 \vspace*{0.9cm}
 \centering
+\tikzset{external/export next=false}
 \begin{tikzpicture}[overlay,scale=1.32]
     %% Define the style for our relay nodes inside the Anonymity Network cloud.
     \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]

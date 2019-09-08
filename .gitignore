@@ -1,5 +1,20 @@
 # Example files.
 example/output/*
 
-# All PDF's.
+# All external caches.
+src/pandoc/*/tikz/
+
+# All PDF's and intermediate files from rendering.
+*.aux
+*.auxlock
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
 *.pdf
+*.snm
+*.tex
+*.toc
+*.vrb
