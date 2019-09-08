@@ -1303,7 +1303,7 @@ entry-point into the Tor network.
 
 ## SNI Domain Fronting using Meek
 
-Very \textbf{efficient}, but \textbf{expensive} \alert{:-(}
+Very **efficient**, but **expensive** \alert{:-(}
 
 Unpopular with the cloud providers:
 
