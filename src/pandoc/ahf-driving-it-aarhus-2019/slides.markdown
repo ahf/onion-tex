@@ -1055,8 +1055,8 @@ Tor's **safety** comes from **diversity**:
 1. Censors will apply censorship to **all** relays in the network and effectively block access to the Tor network.
 2. Censors will apply censorship to **known** bridges.
 
-\textbf{Solution:} We make it difficult to find and block bridges and we make
-it difficult to learn if a given connection is between a Tor user and an
+**Solution**: We make it difficult to find and block bridges and we make it
+difficult to learn if a given connection is between a Tor user and an
 entry-point into the Tor network.
 
 ## Bridges
