@@ -10,7 +10,7 @@ export TEXINPUTS:=$(shell pwd)/../../tex:${TEXINPUTS}
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET_TEX) $(TIKZ)
+$(TARGET): $(TARGET_TEX) tikz
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $(TARGET_TEX)
 
 $(TARGET_TEX): $(SOURCE) $(TEMPLATE)
@@ -34,8 +34,7 @@ data/bandwidth-flags.csv: data
 data/hidserv-rend-relayed-cells.csv: data
 	wget -O $@ https://metrics.torproject.org/hidserv-rend-relayed-cells.csv?start=$(DATA_START_DATE)\&end=$(DATA_END_DATE)
 
-
 clean:
-	rm *.pdf *.aux *.auxlock *.fdb_latexmk *.fls *.log *.nav *.out *.snm *.toc || true
+	rm -fr $(TARGET_TEX) tikz/ *.vrb *.dvi *.pdf *.aux *.auxlock *.fdb_latexmk *.fls *.log *.nav *.out *.snm *.toc || true
 
 .PHONY: data/platforms.csv data/networksize.csv
