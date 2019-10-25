@@ -1351,10 +1351,58 @@ Unpopular with the cloud providers:
 
 ## Snowflake {.c}
 
+\vspace*{0.9cm}
 \centering
-\includegraphics[width=1.0\textwidth]{images/snowflake.png}
+\tikzset{external/export next=false}
+\begin{tikzpicture}[overlay,scale=1.32]
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
+    \tikzstyle{pt}=[rectangle, draw, thin, fill=teal!80, text=white, font=\small, scale=0.8]
+    \tikzstyle{broker}=[rectangle, draw, rounded corners, thin, fill=orange!80, text=white, font=\small, scale=0.8]
 
-\tiny{Source: \href{https://snowflake.torproject.org/}{snowflake.torproject.org}}
+    %% Clip everything that is outside of our "viewport"
+    \clip (-7, -3) rectangle (7, 3);
+
+    %% Our censored area.
+    \node[circle, draw=red!40, fill=red!5, thick, dashed, minimum width=50cm] (censored area) at (-20, 0) {};
+    \node[font=\footnotesize\bfseries, align=center] at (-4, 2.5) {Censored Region};
+
+    %% Alice.
+    \node[font=\small] at (-4, 1.5) {Alice};
+    \node[alice, monitor, minimum size=1.2cm] (alice) at (-4, 0) {};
+
+    %% Snowflake PT Client.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake client) at (-4, -2) {Snowflake PT Client};
+
+    %% Snowflake PT Server.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake server) at (4, -2) {Snowflake PT Server};
+
+    %% Bridge.
+    \node[font=\small] at (4, 1.5) {Bridge};
+    \node[bridge, minimum size=2.5cm] (bridge) at (4, 0) {};
+
+    %% Broker.
+    \node[broker, minimum width=3cm, minimum height=1.2cm] (snowflake broker) at (0.5, 1.85) {Snowflake Broker};
+
+    %% Onion connection between Alice and the Snowflake PT Client.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (alice.south) -- (snowflake client);
+
+    %% Onion connection between the Snowflake PT server and the bridge.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake server) -- (bridge);
+
+    %% Snowflake
+    \node[] (snowflake proxy) at (0, -2) {\includegraphics[angle=0, origin=c]{images/snowflake-status.png}};
+
+    %% Random snowflakes.
+    \node[scale=0.53] at (1.4, -1)  {\includegraphics[angle=37, origin=c]{images/snowflake-status.png}};
+    \node[scale=0.65] at (1.9, 0)   {\includegraphics[angle=67, origin=c]{images/snowflake-status.png}};
+    \node[scale=0.50] at (2.4, 0.9) {\includegraphics[angle=23, origin=c]{images/snowflake-status.png}};
+    \node[scale=0.55] at (0.95, 0.67)   {\includegraphics[angle=17, origin=c]{images/snowflake-status.png}};
+
+    %% Helper lines for debugging.
+    %% \node[] at (0.0, 0.0) {X};
+    %% \draw[help lines] (-7, -3) grid (7, 3);
+\end{tikzpicture}
 
 ## Snowflake {.c}
 
