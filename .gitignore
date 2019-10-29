@@ -15,6 +15,5 @@ src/pandoc/*/tikz/
 *.out
 *.pdf
 *.snm
-*.tex
 *.toc
 *.vrb
