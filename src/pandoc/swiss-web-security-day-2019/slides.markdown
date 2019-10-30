@@ -1075,7 +1075,7 @@ Tor's **safety** comes from **diversity**:
 A modified version of Firefox Extended Support Release (ESR).
 
 \begin{itemize}
-    \item Includes Tor, and various Pluggable Transports and support extensions.
+    \item Includes Tor, Pluggable Transports, and support extensions.
     \item Includes EFF's HTTPS Everywhere extension to protect against malicious Exit node operators.
     \item Includes No Script to protect against various attacks from JavaScript code.
 \end{itemize}
