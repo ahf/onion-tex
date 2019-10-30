@@ -855,6 +855,14 @@ Alice asks $R_{2}$ to extend to $R_{3}$.
 
 Alice finally asks $R_{3}$ to connect to Bob.
 
+
+## The Tor Network
+
+- An open network -- everybody can join!
+- Between 6000 and 7000 relay nodes.
+- Kindly hosted by various individuals, companies, and non-profit organisations.
+- 9 Directory Authority nodes and 1 Bridge Authority node.
+
 ## The Tor Network
 
 \centering
@@ -1067,14 +1075,21 @@ Tor's **safety** comes from **diversity**:
 A modified version of Firefox Extended Support Release (ESR).
 
 \begin{itemize}
-    \item Include EFF's HTTPS Everywhere extension to protect against malicious Exit node operators.
-    \item Include No Script to protect against various attacks from JavaScript code.
-    \item Include Tor and various Pluggable Transports.
+    \item Includes Tor, and various Pluggable Transports and support extensions.
+    \item Includes EFF's HTTPS Everywhere extension to protect against malicious Exit node operators.
+    \item Includes No Script to protect against various attacks from JavaScript code.
 \end{itemize}
+
+## {.plain}
+
+\tikzset{external/export next=false}
+\begin{tikzpicture}[remember picture,overlay, background rectangle/.style={fill=OnionDarkPurple}, show background rectangle]
+    \node[at=(current page.center)] {\includegraphics[scale=0.25]{images/tor_browser_circuit.png}};
+\end{tikzpicture}
 
 ## The Tor Browser
 
-Some of the philosophy around the design choices in Tor Browser includes:
+The philosophy behind the design choices in Tor Browser:
 
 \begin{itemize}
     \item Preserve existing user model.
@@ -1095,6 +1110,13 @@ The security requirements are primarily concerned with ensuring the safe use of 
     \item Disk Avoidance.
     \item Application Data Isolation.
 \end{itemize}
+
+## {.plain}
+
+\tikzset{external/export next=false}
+\begin{tikzpicture}[remember picture,overlay, background rectangle/.style={fill=OnionDarkPurple}, show background rectangle]
+    \node[at=(current page.center)] {\includegraphics[scale=0.30]{images/tor_browser_security.png}};
+\end{tikzpicture}
 
 ## The Tor Browser
 
