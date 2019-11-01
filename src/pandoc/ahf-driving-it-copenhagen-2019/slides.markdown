@@ -1,7 +1,7 @@
 ---
 title: Censorship Circumvention with Tor
 date: November 1, 2019
-institute: Driving IT Copenhagen
+institute: Driving IT
 author:
   - name: Alexander Færøy
     email: ahf@torproject.org
@@ -22,7 +22,7 @@ slides:
                   language, WebKit-based mobile browsers, embedded
                   development, and software development consulting.
             \item Co-organizing the annual Danish hacker festival
-                  \href{https://bornhack.dk/}{BornHack} on Funen.
+                  \href{https://bornhack.dk/}{BornHack}.
         \end{itemize}
     \end{column}
 
@@ -95,8 +95,8 @@ slides:
 ## {.plain}
 
 \tikzset{external/export next=false}
-\begin{tikzpicture}[remember picture,overlay]
-    \node[at=(current page.center)] {\includegraphics[width=\paperwidth, height=\paperheight]{images/tor_browser.png}};
+\begin{tikzpicture}[remember picture,overlay, background rectangle/.style={fill=OnionDarkPurple}, show background rectangle]
+    \node[at=(current page.center)] {\includegraphics[scale=0.25]{images/tor_browser.png}};
 \end{tikzpicture}
 
 ## {.plain}
@@ -1382,7 +1382,7 @@ Unpopular with the cloud providers:
     \node[bridge, minimum size=2.5cm] (bridge) at (4, 0) {};
 
     %% Broker.
-    \node[broker, minimum width=3cm, minimum height=1.2cm] (snowflake broker) at (0.5, 1.85) {Snowflake Broker};
+    \node[broker, minimum width=3cm, minimum height=1.2cm] (snowflake broker) at (0, 1.85) {Snowflake Broker};
 
     %% Onion connection between Alice and the Snowflake PT Client.
     \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (alice.south) -- (snowflake client);
@@ -1398,6 +1398,220 @@ Unpopular with the cloud providers:
     \node[scale=0.65] at (1.9, 0)   {\includegraphics[angle=67, origin=c]{images/snowflake-status.png}};
     \node[scale=0.50] at (2.4, 0.9) {\includegraphics[angle=23, origin=c]{images/snowflake-status.png}};
     \node[scale=0.55] at (0.95, 0.67)   {\includegraphics[angle=17, origin=c]{images/snowflake-status.png}};
+
+    %% Helper lines for debugging.
+    %% \node[] at (0.0, 0.0) {X};
+    %% \draw[help lines] (-7, -3) grid (7, 3);
+\end{tikzpicture}
+
+## Snowflake {.c}
+
+\vspace*{0.9cm}
+\centering
+\tikzset{external/export next=false}
+\begin{tikzpicture}[overlay,scale=1.32]
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
+    \tikzstyle{pt}=[rectangle, draw, thin, fill=teal!80, text=white, font=\small, scale=0.8]
+    \tikzstyle{broker}=[rectangle, draw, rounded corners, thin, fill=orange!80, text=white, font=\small, scale=0.8]
+
+    %% Clip everything that is outside of our "viewport"
+    \clip (-7, -3) rectangle (7, 3);
+
+    %% Our censored area.
+    \node[circle, draw=red!40, fill=red!5, thick, dashed, minimum width=50cm] (censored area) at (-20, 0) {};
+    \node[font=\footnotesize\bfseries, align=center] at (-4, 2.5) {Censored Region};
+
+    %% Alice.
+    \node[font=\small] at (-4, 1.5) {Alice};
+    \node[alice, monitor, minimum size=1.2cm] (alice) at (-4, 0) {};
+
+    %% Snowflake PT Client.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake client) at (-4, -2) {Snowflake PT Client};
+
+    %% Snowflake PT Server.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake server) at (4, -2) {Snowflake PT Server};
+
+    %% Bridge.
+    \node[font=\small] at (4, 1.5) {Bridge};
+    \node[bridge, minimum size=2.5cm] (bridge) at (4, 0) {};
+
+    %% Broker.
+    \node[broker, minimum width=3cm, minimum height=1.2cm] (snowflake broker) at (0, 1.85) {Snowflake Broker};
+
+    %% Onion connection between Alice and the Snowflake PT Client.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (alice.south) -- (snowflake client);
+
+    %% Onion connection between the Snowflake PT server and the bridge.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake server) -- (bridge);
+
+    %% Snowflake
+    \node[] (snowflake proxy) at (0, -2) {\includegraphics[angle=0, origin=c]{images/snowflake-status.png}};
+
+    %% Arrow between the Snowflake proxy and the broker.
+    \draw[<->, thick, teal!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake broker.south) -- (snowflake proxy.north);
+
+    %% Helper lines for debugging.
+    %% \node[] at (0.0, 0.0) {X};
+    %% \draw[help lines] (-7, -3) grid (7, 3);
+\end{tikzpicture}
+
+## Snowflake {.c}
+
+\vspace*{0.9cm}
+\centering
+\tikzset{external/export next=false}
+\begin{tikzpicture}[overlay,scale=1.32]
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
+    \tikzstyle{pt}=[rectangle, draw, thin, fill=teal!80, text=white, font=\small, scale=0.8]
+    \tikzstyle{broker}=[rectangle, draw, rounded corners, thin, fill=orange!80, text=white, font=\small, scale=0.8]
+
+    %% Clip everything that is outside of our "viewport"
+    \clip (-7, -3) rectangle (7, 3);
+
+    %% Our censored area.
+    \node[circle, draw=red!40, fill=red!5, thick, dashed, minimum width=50cm] (censored area) at (-20, 0) {};
+    \node[font=\footnotesize\bfseries, align=center] at (-4, 2.5) {Censored Region};
+
+    %% Alice.
+    \node[font=\small] at (-4, 1.5) {Alice};
+    \node[alice, monitor, minimum size=1.2cm] (alice) at (-4, 0) {};
+
+    %% Snowflake PT Client.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake client) at (-4, -2) {Snowflake PT Client};
+
+    %% Snowflake PT Server.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake server) at (4, -2) {Snowflake PT Server};
+
+    %% Bridge.
+    \node[font=\small] at (4, 1.5) {Bridge};
+    \node[bridge, minimum size=2.5cm] (bridge) at (4, 0) {};
+
+    %% Broker.
+    \node[broker, minimum width=3cm, minimum height=1.2cm] (snowflake broker) at (0, 1.85) {Snowflake Broker};
+
+    %% Onion connection between Alice and the Snowflake PT Client.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (alice.south) -- (snowflake client);
+
+    %% Onion connection between the Snowflake PT server and the bridge.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake server) -- (bridge);
+
+    %% Snowflake
+    \node[] (snowflake proxy) at (0, -2) {\includegraphics[angle=0, origin=c]{images/snowflake-status.png}};
+
+    %% Arrow between the Snowflake proxy and the broker.
+    \draw[<->, thick, teal!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake broker.south) -- (snowflake proxy.north);
+
+    %% Arrow between the PT client and the broker.
+    \draw[<->, thick, teal!80, shorten >= 0.3cm, shorten <= 0.3cm, bend right] (snowflake client.east) -- (snowflake broker.south west);
+
+    %% Helper lines for debugging.
+    %% \node[] at (0.0, 0.0) {X};
+    %% \draw[help lines] (-7, -3) grid (7, 3);
+\end{tikzpicture}
+
+## Snowflake {.c}
+
+\vspace*{0.9cm}
+\centering
+\tikzset{external/export next=false}
+\begin{tikzpicture}[overlay,scale=1.32]
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
+    \tikzstyle{pt}=[rectangle, draw, thin, fill=teal!80, text=white, font=\small, scale=0.8]
+    \tikzstyle{broker}=[rectangle, draw, rounded corners, thin, fill=orange!80, text=white, font=\small, scale=0.8]
+
+    %% Clip everything that is outside of our "viewport"
+    \clip (-7, -3) rectangle (7, 3);
+
+    %% Our censored area.
+    \node[circle, draw=red!40, fill=red!5, thick, dashed, minimum width=50cm] (censored area) at (-20, 0) {};
+    \node[font=\footnotesize\bfseries, align=center] at (-4, 2.5) {Censored Region};
+
+    %% Alice.
+    \node[font=\small] at (-4, 1.5) {Alice};
+    \node[alice, monitor, minimum size=1.2cm] (alice) at (-4, 0) {};
+
+    %% Snowflake PT Client.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake client) at (-4, -2) {Snowflake PT Client};
+
+    %% Snowflake PT Server.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake server) at (4, -2) {Snowflake PT Server};
+
+    %% Bridge.
+    \node[font=\small] at (4, 1.5) {Bridge};
+    \node[bridge, minimum size=2.5cm] (bridge) at (4, 0) {};
+
+    %% Broker.
+    \node[broker, minimum width=3cm, minimum height=1.2cm] (snowflake broker) at (0, 1.85) {Snowflake Broker};
+
+    %% Onion connection between Alice and the Snowflake PT Client.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (alice.south) -- (snowflake client);
+
+    %% Onion connection between the Snowflake PT server and the bridge.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake server) -- (bridge);
+
+    %% Snowflake
+    \node[] (snowflake proxy) at (0, -2) {\includegraphics[angle=0, origin=c]{images/snowflake-status.png}};
+
+    %% Arrow between the Snowflake PT client and the proxy.
+    \draw[<->, thick, cyan!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake client.east) -- (snowflake proxy.west);
+
+    %% Helper lines for debugging.
+    %% \node[] at (0.0, 0.0) {X};
+    %% \draw[help lines] (-7, -3) grid (7, 3);
+\end{tikzpicture}
+
+## Snowflake {.c}
+
+\vspace*{0.9cm}
+\centering
+\tikzset{external/export next=false}
+\begin{tikzpicture}[overlay,scale=1.32]
+    %% Define the style for our relay nodes inside the Anonymity Network cloud.
+    \tikzstyle{bridge}=[circle, draw, thin, fill=cyan!80, text=white, font=\scriptsize, scale=0.8]
+    \tikzstyle{pt}=[rectangle, draw, thin, fill=teal!80, text=white, font=\small, scale=0.8]
+    \tikzstyle{broker}=[rectangle, draw, rounded corners, thin, fill=orange!80, text=white, font=\small, scale=0.8]
+
+    %% Clip everything that is outside of our "viewport"
+    \clip (-7, -3) rectangle (7, 3);
+
+    %% Our censored area.
+    \node[circle, draw=red!40, fill=red!5, thick, dashed, minimum width=50cm] (censored area) at (-20, 0) {};
+    \node[font=\footnotesize\bfseries, align=center] at (-4, 2.5) {Censored Region};
+
+    %% Alice.
+    \node[font=\small] at (-4, 1.5) {Alice};
+    \node[alice, monitor, minimum size=1.2cm] (alice) at (-4, 0) {};
+
+    %% Snowflake PT Client.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake client) at (-4, -2) {Snowflake PT Client};
+
+    %% Snowflake PT Server.
+    \node[pt, minimum width=3.5cm, rounded corners] (snowflake server) at (4, -2) {Snowflake PT Server};
+
+    %% Bridge.
+    \node[font=\small] at (4, 1.5) {Bridge};
+    \node[bridge, minimum size=2.5cm] (bridge) at (4, 0) {};
+
+    %% Broker.
+    \node[broker, minimum width=3cm, minimum height=1.2cm] (snowflake broker) at (0, 1.85) {Snowflake Broker};
+
+    %% Onion connection between Alice and the Snowflake PT Client.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (alice.south) -- (snowflake client);
+
+    %% Onion connection between the Snowflake PT server and the bridge.
+    \draw[<->, thick, OnionDarkPurple!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake server) -- (bridge);
+
+    %% Snowflake
+    \node[] (snowflake proxy) at (0, -2) {\includegraphics[angle=0, origin=c]{images/snowflake-status.png}};
+
+    %% Arrow between the Snowflake PT client and the proxy.
+    \draw[<->, thick, cyan!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake client.east) -- (snowflake proxy.west);
+
+    %% Arrow between the Snowflake proxy and the bridge.
+    \draw[<->, thick, teal!80, shorten >= 0.3cm, shorten <= 0.3cm] (snowflake proxy.east) -- (snowflake server.west);
 
     %% Helper lines for debugging.
     %% \node[] at (0.0, 0.0) {X};
