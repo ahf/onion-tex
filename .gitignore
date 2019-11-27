@@ -17,3 +17,6 @@ src/pandoc/*/tikz/
 *.snm
 *.toc
 *.vrb
+
+# Ignore all 'slides.tex' in the Pandoc dir.
+src/pandoc/*/slides.tex
