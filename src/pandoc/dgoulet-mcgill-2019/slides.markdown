@@ -126,7 +126,7 @@ slides:
     %% \draw[help lines] (-7,-3) grid (7,3);
 \end{tikzpicture}
 
-\large{What can the attacker do?}
+\large What can the attacker do?
 
 ## Threat Model {.t}
 
@@ -358,7 +358,7 @@ slides:
     %% \draw[help lines] (-7,-3) grid (7,3);
 \end{tikzpicture}
 
-\large{Encryption just protects contents.}
+\large Encryption just protects contents.
 
 ## Metadata
 
@@ -838,7 +838,7 @@ Alice finally asks $R_{3}$ to connect to Bob.
     \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## The Tor Network
 
@@ -893,7 +893,7 @@ Alice finally asks $R_{3}$ to connect to Bob.
     \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## The Tor Network
 
@@ -1009,7 +1009,7 @@ Properties includes:
 \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## {.t}
 
@@ -1245,7 +1245,7 @@ Properties includes:
 
 \vspace*{1.2cm}
 
-\tiny{Source: \href{https://facebook.com/notes/facebook-over-tor/1-million-people-use-facebook-over-tor/865624066877648/}{facebook.com}}
+\tiny Source: \href{https://facebook.com/notes/facebook-over-tor/1-million-people-use-facebook-over-tor/865624066877648/}{facebook.com}
 
 
 ## Introduction to Censorship {.c}
@@ -1511,7 +1511,7 @@ entry-point into the Tor network.
 \centering
 \includegraphics[width=0.6\textwidth]{images/bridgedb.png}
 
-\tiny{Source: \href{https://bridges.torproject.org/}{bridges.torproject.org}}
+\tiny Source: \href{https://bridges.torproject.org/}{bridges.torproject.org}
 
 ## Bridge Distribution using Moat {.c}
 
@@ -1561,7 +1561,7 @@ entry-point into the Tor network.
   \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## Zimbabwe - Social Media Block
 
@@ -1607,7 +1607,7 @@ entry-point into the Tor network.
   \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## Ethiopia - Internet Shutdown
 
@@ -1653,7 +1653,7 @@ entry-point into the Tor network.
   \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## Venezuela - Censorship
 
@@ -1700,7 +1700,7 @@ entry-point into the Tor network.
 \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## Mali - Election Day
 
@@ -1747,7 +1747,7 @@ entry-point into the Tor network.
 \end{axis}
 \end{tikzpicture}
 
-\tiny{Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}}
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
 
 ## Tor is not foolproof
 
@@ -1783,7 +1783,7 @@ entry-point into the Tor network.
 
 \vfill
 
-\huge{Questions?}
+\huge Questions?
 
 \vfill
 
@@ -1795,7 +1795,7 @@ entry-point into the Tor network.
 
 This work is licensed under a
 
-\large{\href{https://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons \\ Attribution-ShareAlike 4.0 International License}}
+\large \href{https://creativecommons.org/licenses/by-sa/4.0/}{Creative Commons \\ Attribution-ShareAlike 4.0 International License}
 
 \vfill
 
