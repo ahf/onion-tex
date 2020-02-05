@@ -1,0 +1,105 @@
+%% Copyright (c) 2019 The Tor Project, inc. All rights reserved.
+%% Use of this source code is governed by a BSD-style
+%% license that can be found in the LICENSE file.
+\documentclass[aspectratio=$if(slides.aspect-ratio)$$slides.aspect-ratio$$else$169$endif$,$if(slides.font-size)$$slides.font-size$$else$10pt$endif$]{beamer}
+
+\usepackage[utf8]{inputenc}
+
+\usetheme{onion}
+
+\usepackage[shortlabels]{enumitem}
+
+\setlist[description]{align=parleft, labelwidth=3cm}
+\setlist[enumerate]{1., font=\color{OnionDarkPurple}}
+\setlist[itemize]{label=$$\bullet$$, font=\color{OnionDarkPurple}}
+\setlist[itemize,2]{label=$$\circ$$, font=\color{OnionDarkPurple}}
+
+\usepackage{csvsimple}
+\usepackage[scale=2]{ccicons}
+\usepackage{tikzpeople}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\usepackage{booktabs}
+
+\usetikzlibrary{shapes,backgrounds,dateplot,external,lindenmayersystems}
+
+\tikzexternalize[prefix=tikz/]
+
+\setbeamertemplate{footline}{\raisebox{5pt}{\makebox[\paperwidth]{\hfill\makebox[20pt]{\color{gray}\scriptsize\insertframenumber}}}\hspace*{5pt}}
+
+\newcommand{\highlight}[1]{%
+    \textbf{\alert{#1}}
+}
+
+\newcommand{\colorhref}[3][OnionBlack]{%
+    \href{#2}{\color{#1}{#3}}
+}
+
+$if(title)$
+\title{$title$}
+$endif$
+
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+
+$if(date)$
+\date{$date$}
+$else$
+\date{\today}
+$endif$
+
+$if(author)$
+\author{$for(author)$\colorhref{mailto:$author.email$}{$author.name$}$sep$ \and $endfor$}
+$endif$
+
+$if(institute)$
+\institute{$institute$}
+$endif$
+
+$if(slides.logo)$
+\titlegraphic{$slides.logo$}
+$else$
+\titlegraphic{\onionlogocolor}
+$endif$
+
+\setlength{\parskip}{3mm}
+
+%% Pandoc uses \tightlist when using enumerations/lists in Markdown.
+\providecommand{\tightlist}{\setlength{\itemsep}{4pt}\setlength{\parskip}{1pt}}
+
+\AtBeginPart{
+    \let\insertpartnumber\relax
+    \let\partname\relax
+    \frame{\partpage}
+}
+
+\AtBeginSection{
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+}
+
+\AtBeginSubsection{
+    \let\insertsubsectionnumber\relax
+    \let\subsectionname\relax
+    \frame{\subsectionpage}
+}
+
+\begin{document}
+
+$if(title)$
+\begin{frame}[plain,noframenumbering]
+    \titlepage
+\end{frame}
+$endif$
+
+$if(slides.table-of-contents)$
+\begin{frame}[plain,noframenumbering]
+    \tableofcontents
+\end{frame}
+$endif$
+
+$body$
+
+\end{document}
