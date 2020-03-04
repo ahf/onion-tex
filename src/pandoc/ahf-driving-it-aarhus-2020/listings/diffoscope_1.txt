@@ -1,0 +1,19 @@
+--- mar-tools-mac64.zip
++++ /home/boklm/tor-browser-build/alpha/unsigned/8.5a8/mar-tools-mac64.zip
+  zipinfo {}
+@@ -1,20 +1,20 @@
+-Zip file size: 2049025 bytes, number of entries: 18
++Zip file size: 2049012 bytes, number of entries: 18
+ drwx------  3.0 unx        0 b- stor 19-Feb-12 08:50 mar-tools/
+
+  <@\color{gray}{[...]}@>
+
+--rwx------  3.0 unx    50216 b- defN 19-Feb-12 08:50 mar-tools/mar
+--rwx------  3.0 unx    27112 b- defN 19-Feb-12 08:50 mar-tools/mbsdiff
++-rwx------  3.0 unx    50208 b- defN 19-Feb-12 08:50 mar-tools/mar
++-rwx------  3.0 unx    27104 b- defN 19-Feb-12 08:50 mar-tools/mbsdiff
+
+  <@\color{gray}{[...]}@>
+
+-18 files, 4637421 bytes uncompressed, 2046841 bytes compressed:  55.9%
++18 files, 4637405 bytes uncompressed, 2046828 bytes compressed:  55.9%

@@ -1,0 +1,10 @@
+readelf --wide --string-dump=.comment {}
+@@ -1,6 +1,6 @@
+
+ String dump of section '.comment':
+-  [     0]  GCC: (Debian 4.9.2-10+deb8u1) 4.9.2
+-  [    24]  clang version 3.9.1 (tags/RELEASE_391/final)
+-  [    51]  GCC: (Debian 4.8.4-1) 4.8.4
++  [     0]  GCC: (Debian 4.9.2-10) 4.9.2
++  [    1d]  clang version 3.9.1 (tags/RELEASE_391/final)
++  [    4a]  GCC: (Debian 4.8.4-1) 4.8.4

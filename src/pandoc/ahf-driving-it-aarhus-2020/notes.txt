@@ -1,0 +1,12 @@
+- Reproducible builds grafik med udviklere der alle faar samme checksum
+- Reproducible Builds CT and multiple people gpg signing?
+- We build everything on Linux!
+
+DONE:
+- Alpha releases under "How can I help?"
+- update android browser graphics to anto's new stuff
+- Reproducible builds grafik med Bitcoin, Tor, Debian
+- diffoscope: #29510
+
+DROP:
+- Onion services. Maaske video from acat med naming?
