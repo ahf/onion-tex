@@ -21,10 +21,20 @@
     commentstyle=\color{OnionDarkGray!80},
     stringstyle=\color{OnionGreen},
     breaklines=true,
-    showstringspaces=false
+    showstringspaces=false,
+    escapeinside={<@}{@>}
 }
 
 %%
 %% \onionsourcefile{filename}{language}
 %%
 \newcommand{\onionsourcefile}[2]{\lstinputlisting[language={#2}]{#1}}
+
+%%
+%% Diff language.
+%%
+\lstdefinelanguage{diff}{
+  morecomment=[f][\color{DiffRed}]-,
+  morecomment=[f][\color{DiffGreen}]+,
+  morecomment=[f][\textit]{@@},
+}
