@@ -115,6 +115,204 @@ slides:
     \node[at=(current page.center)] {\includegraphics[scale=0.15]{images/tor_browser_android_shadow2.png}};
 \end{tikzpicture}
 
+## {.plain}
+
+But we also ship Tor to others:
+
+\begin{itemize}
+    \item We have our own Debian mirror on \href{https://deb.torproject.org/}{deb.torproject.org}.
+    \item Other free software distributions. This is often where the relay operators get their Tor version from.
+    \item Brave's "Private Tab" feature uses Tor.
+    \item OnionShare, SecureDrop, etc.
+\end{itemize}
+
+## The Tor Network
+
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+            title=Number of Relays,
+            title style={font=\scriptsize\bfseries},
+            no markers,
+            enlarge x limits=false,
+            grid=both,
+            grid style=dashed,
+            width=0.85\paperwidth,
+            height=0.80\paperheight,
+            date coordinates in=x,
+            xmin=2010-01-01,
+            xmax=2020-01-01,
+            xtick={
+                {2010-01-01},
+                {2011-01-01},
+                {2012-01-01},
+                {2013-01-01},
+                {2014-01-01},
+                {2015-01-01},
+                {2016-01-01},
+                {2017-01-01},
+                {2018-01-01},
+                {2019-01-01},
+                {2020-01-01}
+            },
+            cycle list name=exotic,
+            every axis plot/.append style={thick},
+            label style={font=\scriptsize},
+            tick label style={font=\scriptsize},
+            legend style={
+                font=\tiny,
+            },
+            legend pos=north west,
+            legend cell align=left,
+            unbounded coords=discard,
+            xticklabel style={
+                anchor=near xticklabel,
+            },
+            xticklabel=\year\
+            ]
+
+        \addlegendentry{Relays}
+        \addplot table [x=date, y=relays, col sep=comma] {data/networksize.csv};
+
+        \addlegendentry{Bridges}
+        \addplot table [x=date, y=bridges, col sep=comma] {data/networksize.csv};
+    \end{axis}
+\end{tikzpicture}
+
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
+
+## The Tor Network
+
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+            title=Total Relay Bandwidth,
+            title style={font=\scriptsize\bfseries},
+            no markers,
+            enlarge x limits=false,
+            grid=both,
+            grid style=dashed,
+            width=0.85\paperwidth,
+            height=0.80\paperheight,
+            date coordinates in=x,
+            xmin=2010-01-01,
+            xmax=2020-01-01,
+            xtick={
+                {2010-01-01},
+                {2011-01-01},
+                {2012-01-01},
+                {2013-01-01},
+                {2014-01-01},
+                {2015-01-01},
+                {2016-01-01},
+                {2017-01-01},
+                {2018-01-01},
+                {2019-01-01},
+                {2020-01-01}
+            },
+            cycle list name=exotic,
+            every axis plot/.append style={thick},
+            label style={font=\scriptsize},
+            tick label style={font=\scriptsize},
+            legend style={
+                font=\tiny,
+            },
+            legend pos=north west,
+            legend cell align=left,
+            unbounded coords=discard,
+            xticklabel style={
+                anchor=near xticklabel,
+            },
+            ylabel={Bandwidth in Gbit/s},
+            xticklabel=\year\
+            ]
+
+        \addlegendentry{Advertised Bandwidth}
+        \addplot table [x=date, y=advbw, col sep=comma] {data/bandwidth-flags_compressed.csv};
+
+        \addlegendentry{Bandwidth History}
+        \addplot table [x=date, y=bwhist, col sep=comma] {data/bandwidth-flags_compressed.csv};
+    \end{axis}
+\end{tikzpicture}
+
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
+
+## The Tor Network
+
+Tor's **safety** comes from **diversity**:
+
+1. Diversity of relays. The more relays we have and the more diverse
+   they are, the fewer attackers are in a position to do traffic confirmation.
+
+2. Diversity of users and reasons to use it. 50,000 users in Iran means
+   almost all of them are normal citizens.
+
+**Research problem**: How do we measure diversity over time?
+
+## The Tor Network
+
+\centering
+\begin{tikzpicture}
+    \begin{axis}[
+            title=Number of Relays per Platform,
+            title style={font=\scriptsize\bfseries},
+            no markers,
+            enlarge x limits=false,
+            grid=both,
+            grid style=dashed,
+            width=0.85\paperwidth,
+            height=0.80\paperheight,
+            date coordinates in=x,
+            xmin=2010-01-01,
+            xmax=2020-01-01,
+            xtick={
+                {2010-01-01},
+                {2011-01-01},
+                {2012-01-01},
+                {2013-01-01},
+                {2014-01-01},
+                {2015-01-01},
+                {2016-01-01},
+                {2017-01-01},
+                {2018-01-01},
+                {2019-01-01},
+                {2020-01-01}
+            },
+            cycle list name=exotic,
+            every axis plot/.append style={thick},
+            label style={font=\scriptsize},
+            tick label style={font=\scriptsize},
+            legend style={
+                font=\tiny,
+            },
+            legend pos=north west,
+            legend cell align=left,
+            unbounded coords=discard,
+            xticklabel style={
+                anchor=near xticklabel,
+            },
+            xticklabel=\year\
+            ]
+
+        \addlegendentry{Linux}
+        \addplot table [x=date, y=linux, col sep=comma] {data/platforms.csv};
+
+        \addlegendentry{BSD}
+        \addplot table [x=date, y=bsd, col sep=comma] {data/platforms.csv};
+
+        \addlegendentry{Windows}
+        \addplot table [x=date, y=windows, col sep=comma] {data/platforms.csv};
+
+        \addlegendentry{macOS}
+        \addplot table [x=date, y=macos, col sep=comma] {data/platforms.csv};
+
+        \addlegendentry{Other}
+        \addplot table [x=date, y=other, col sep=comma] {data/platforms.csv};
+    \end{axis}
+\end{tikzpicture}
+
+\tiny Source: \href{https://metrics.torproject.org/}{metrics.torproject.org}
+
 ## Tor Releases {.c}
 
 \centering
